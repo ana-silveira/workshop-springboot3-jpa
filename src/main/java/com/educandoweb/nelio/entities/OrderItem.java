@@ -1,6 +1,7 @@
 package com.educandoweb.nelio.entities;
 
 import com.educandoweb.nelio.entities.pk.OrderItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -14,7 +15,7 @@ public class OrderItem {
     private static final long serialVersionUID = 1L;
 
     @EmbeddedId
-    private OrderItemPK id;
+    private OrderItemPK id = new OrderItemPK();
     private Integer quantity;
     private Double price;
 
@@ -22,13 +23,14 @@ public class OrderItem {
     }
 
     public OrderItem(Order order, Product product, Integer quantity, Double price) {
+        super();
         id.setOrder(order);
         id.setProduct(product);
         this.quantity = quantity;
         this.price = price;
     }
-
-    public Order getOrder(Order order) {
+    @JsonIgnore
+    public Order getOrder() {
         return id.getOrder();
     }
 
@@ -36,7 +38,7 @@ public class OrderItem {
         id.setOrder(order);
     }
 
-    public Product getProduct(Product product) {
+    public Product getProduct() {
         return id.getProduct();
     }
 
