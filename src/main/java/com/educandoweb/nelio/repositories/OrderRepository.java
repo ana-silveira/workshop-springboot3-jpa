@@ -1,0 +1,8 @@
+package com.educandoweb.nelio.repositories;
+
+import com.educandoweb.nelio.entities.Order;
+import com.educandoweb.nelio.entities.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface OrderRepository extends JpaRepository<Order, Long> {
+}
