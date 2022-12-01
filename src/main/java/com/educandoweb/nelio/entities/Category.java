@@ -1,6 +1,7 @@
 package com.educandoweb.nelio.entities;
 
 import com.educandoweb.nelio.repositories.ProductRepository;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -20,8 +21,8 @@ import java.util.Set;
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
         private String name;
-
-        @Transient
+        @JsonIgnore
+        @ManyToMany (mappedBy = "categories")
         private Set<Product> products = new HashSet<>();
 
         public Category() {
@@ -47,6 +48,8 @@ import java.util.Set;
         public void setName(String name) {
             this.name = name;
         }
+
+
 
         @Override
         public boolean equals(Object o) {
